@@ -10,7 +10,7 @@ namespace VyalovAlexander\ImageDefender\Gd;
 
 use VyalovAlexander\ImageDefender\ImageDefenderInterface;
 
-class GDImageDefender //implements ImageDefenderInterface
+class GDImageDefender implements ImageDefenderInterface
 {
 
     public function imposeStamp(string $pathToImage, string $savePath, string $pathToStamp, int $stampMarginRight, int $stampMarginBottom, int $stampTransparency, int $stampHeight = null, int $stampWidth = null): string
@@ -27,25 +27,10 @@ class GDImageDefender //implements ImageDefenderInterface
         return $this->saveImageToFile($savePath, $image);
     }
 
-    public function imposeText($pathToImage, $savePath, $text): string
+    public function imposeText(string $pathToImage, string $savePath, string $text, int $textMarginRight, int $textMarginBottom, int $fontSize, string $pathToTTFFont = null): string
     {
         $image = $this->getImageFromFile($pathToImage);
         $result = imagestring (  $image , 1 , 20 , 20 , $text , imagecolorallocate($image, 255, 44, 34));
-        return $this->saveImageToFile($savePath, $image);
-
-    }
-
-
-    public function imposeMultiStamp(string $pathToImage, string $savePath, string $pathToStamp, int $stampTransparency, int $stampHeight = null, int $stampWidth = null): string
-    {
-        $image = $this->getImageFromFile($pathToImage);
-        $stamp = $this->getImageFromFile($pathToStamp);
-        $stampWidth = is_null($stampWidth) ? imagesx($stamp) : $stampWidth;
-        $stampHeight = is_null($stampHeight) ? imagesy($stamp) : $stampHeight;
-        $stamp = imagescale($stamp, $stampWidth, $stampHeight);
-        imagesettile($image, $stamp);
-        imagefilledrectangle($image, 0, 0, $stampWidth, $stampHeight, IMG_COLOR_TILED);
-        imagedestroy($stamp);
         return $this->saveImageToFile($savePath, $image);
     }
 
