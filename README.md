@@ -24,7 +24,7 @@ composer require vyalov.alexander/imagedefender
 
 ## Usage
 
-##GD realisation of ImageDefenderInterface
+## GD realisation of ImageDefenderInterface
 
 Class VyalovAlexander\ImageDefender\Gd\GDImageDefender implements ImageDefenderInterface
 
