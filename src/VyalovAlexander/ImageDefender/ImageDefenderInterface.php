@@ -28,13 +28,13 @@ interface ImageDefenderInterface
      * @param string $pathToImage
      * @param string $savePath
      * @param string $text
-     * @param int $textMarginRight
-     * @param int $textMarginBottom
+     * @param int $textXPosition
+     * @param int $textYPosition
      * @param int $fontSize
      * @param string|null $pathToTTFFont
      * @return string
      *
      * @throws \Exception
      */
-    public function imposeText(string $pathToImage, string $savePath, string $text, int $textMarginLeft, int $textMarginTop, int $textTransparency, int $fontSize, string $pathToTTFFont = null): string;
+    public function imposeText(string $pathToImage, string $savePath, string $text, int $textXPosition, int $textYPosition, int $textTransparency, int $fontSize, string $pathToTTFFont = null): string;
 }
