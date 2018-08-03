@@ -15,32 +15,35 @@ Execute the following command to get the latest version of the package:
 ```terminal
 composer require vyalov.alexander/imagedefender
 ```
-## Methods
-
-### VyalovAlexander\ImageDefender\ImageDefenderInterface
-
-- imposeStamp(string $pathToImage, string $savePath, string $pathToStamp, int $stampMarginRight, int $stampMarginBottom, int $stampTransparency, int $stampHeight = null, int $stampWidth = null)
-- imposeText(string $pathToImage, string $savePath, string $text, int $textXPosition, int $textYPosition, int $textTransparency, int $fontSize, string $pathToTTFFont = null)
 
 ## Usage
 
 ## GD realisation of ImageDefenderInterface
 
-Class VyalovAlexander\ImageDefender\Gd\GDImageDefender implements ImageDefenderInterface
-
 ### Stamp
 ```php
-    $imageDefender = new \VyalovAlexander\ImageDefender\Gd\GDImageDefender();
-    $imageDefender->imposeStamp("path/to/picture/you/want/to/protect", "/save/path/of/resulting/picture", "/path/to/stamp/image", 20, 20 ,50);
+    $storage = new GDImageStorage();
+    
+    $stampDefender = new GDStampImageDefender($storage);
+    $stampDefender->imposeStamp(
+        "path/to/picture/you/want/to/protect",
+        "/save/path/of/resulting/picture",
+        "/path/to/stamp/image",
+        10, 10, 20);
 ```  
 ![Stamp](https://preview.ibb.co/gfYMLe/stamp.png)
     
 ### Text
 ```php
-    $imageDefender = new \VyalovAlexander\ImageDefender\Gd\GDImageDefender();
-    $imageDefender->imposeText("path/to/picture/you/want/to/protect", "/save/path/of/resulting/picture", "Copyright © VyalovAlexander/ImageDefender", 280, 820,  10, 20);;
+    $storage = new GDImageStorage();
+    
+    $textDefender = new GDTextImageDefender($storage);
+    $textDefender->imposeText(
+        "path/to/picture/you/want/to/protect",
+        "/save/path/of/resulting/picture",
+        "Copyright © VyalovAlexander/ImageDefender", 
+        280, 820,  10, 20);
 ```      
-
 ![Text](https://preview.ibb.co/d5ENRK/text.png)
     
 

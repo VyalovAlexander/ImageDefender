@@ -48,24 +48,4 @@ class GDStampImageDefender implements StampImageDefenderInterface
         return $this->storage->save($savePath, $image);
     }
 
-    /**
-     * @param string $pathToImage
-     * @param string $savePath
-     * @param string $text
-     * @param int $textXPosition
-     * @param int $textYPosition
-     * @param int $textTransparency
-     * @param int $fontSize
-     * @param string|null $pathToTTFFont
-     * @return string
-     */
-    public function imposeText(string $pathToImage, string $savePath, string $text, int $textXPosition, int $textYPosition, int $textTransparency, int $fontSize, string $pathToTTFFont = null): string
-    {
-        $image = $this->getImageFromFile($pathToImage);
-        $black = imagecolorallocatealpha($image, 0, 0, 0, $textTransparency);
-        $pathToTTFFont = is_null($pathToTTFFont) ? dirname(__FILE__) . "/resources/font.ttf" : $pathToTTFFont;
-        imagettftext($image, $fontSize, 0, $textXPosition, $textYPosition, $black, $pathToTTFFont, $text);
-        return $this->saveImageToFile($savePath, $image);
-    }
-
 }
