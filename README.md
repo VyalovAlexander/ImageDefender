@@ -1,5 +1,5 @@
 
-#About ImageDefender
+# About ImageDefender
 
 ---
 
@@ -28,14 +28,14 @@ composer require vyalov.alexander/imagedefender
 
 Class VyalovAlexander\ImageDefender\Gd\GDImageDefender implements ImageDefenderInterface
 
-###Stamp
+### Stamp
 ```php
     $imageDefender = new \VyalovAlexander\ImageDefender\Gd\GDImageDefender();
     $imageDefender->imposeStamp("path/to/picture/you/want/to/protect", "/save/path/of/resulting/picture", "/path/to/stamp/image", 20, 20 ,50);
 ```  
 ![Stamp](https://preview.ibb.co/gfYMLe/stamp.png)
     
-###Text
+### Text
 ```php
     $imageDefender = new \VyalovAlexander\ImageDefender\Gd\GDImageDefender();
     $imageDefender->imposeText("path/to/picture/you/want/to/protect", "/save/path/of/resulting/picture", "Copyright © VyalovAlexander/ImageDefender", 280, 820,  10, 20);;
