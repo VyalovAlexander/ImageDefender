@@ -1,4 +1,4 @@
-#About ImageDefender
+##About ImageDefender
 
 ---
 
@@ -32,7 +32,7 @@ Class VyalovAlexander\ImageDefender\Gd\GDImageDefender implements ImageDefenderI
     $imageDefender = new \VyalovAlexander\ImageDefender\Gd\GDImageDefender();
     $imageDefender->imposeStamp("path/to/picture/you/want/to/protect", "/save/path/of/resulting/picture", "/path/to/stamp/image", 20, 20 ,50);
 ```  
-![Stamp](https://ibb.co/gaotYz)
+![Stamp](https://image.ibb.co/cVcntz/newball1.png)
     
 ###Text
 ```php
@@ -40,7 +40,7 @@ Class VyalovAlexander\ImageDefender\Gd\GDImageDefender implements ImageDefenderI
     $imageDefender->imposeText("path/to/picture/you/want/to/protect", "/save/path/of/resulting/picture", "Copyright © VyalovAlexander/ImageDefender", 280, 820,  10, 20);;
 ```      
 
-![Text](https://ibb.co/daLqDz)
+![Text](https://image.ibb.co/ec3XRK/newball.png)
     
 
 
