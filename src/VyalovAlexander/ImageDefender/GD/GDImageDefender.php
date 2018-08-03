@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexander
- * Date: 02.08.18
- * Time: 10:28
- */
 
 namespace VyalovAlexander\ImageDefender\Gd;
 
 use VyalovAlexander\ImageDefender\ImageDefenderInterface;
 
-class GDImageDefender implements ImageDefenderInterface
+class GDImageDefender// implements ImageDefenderInterface
 {
 
     public function imposeStamp(string $pathToImage, string $savePath, string $pathToStamp, int $stampMarginRight, int $stampMarginBottom, int $stampTransparency, int $stampHeight = null, int $stampWidth = null): string
@@ -27,17 +21,20 @@ class GDImageDefender implements ImageDefenderInterface
         return $this->saveImageToFile($savePath, $image);
     }
 
-    public function imposeText(string $pathToImage, string $savePath, string $text, int $textMarginRight, int $textMarginBottom, int $fontSize, string $pathToTTFFont = null): string
+    public function imposeText(string $pathToImage, string $savePath, string $text, int $textMarginLeft, int $textMarginTop, int $textTransparency, int $fontSize, string $pathToTTFFont = null): string
     {
         $image = $this->getImageFromFile($pathToImage);
-        $result = imagestring (  $image , 1 , 20 , 20 , $text , imagecolorallocate($image, 255, 44, 34));
+        $black = imagecolorallocatealpha($image, 0, 0, 0, $textTransparency);
+        $pathToTTFFont = is_null($pathToTTFFont) ? dirname(__FILE__) . "/resources/font.ttf" : $pathToTTFFont;
+        imagettftext($image, $fontSize, 0, $textMarginTop, $textMarginLeft, $black, $pathToTTFFont, $text);
         return $this->saveImageToFile($savePath, $image);
     }
 
 
     private function getExtension(string $filename): string
     {
-        return array_pop(explode(".", $filename));
+        $ex = explode(".", $filename);
+        return array_pop($ex);
     }
 
     private function getImageFromFile(string $filename)

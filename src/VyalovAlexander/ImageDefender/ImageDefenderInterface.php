@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexander
- * Date: 02.08.18
- * Time: 10:16
- */
 
 namespace VyalovAlexander\ImageDefender;
 
@@ -42,5 +36,5 @@ interface ImageDefenderInterface
      *
      * @throws \Exception
      */
-    public function imposeText(string $pathToImage, string $savePath, string $text, int $textMarginRight, int $textMarginBottom, int $fontSize, string $pathToTTFFont = null): string;
+    public function imposeText(string $pathToImage, string $savePath, string $text, int $textMarginLeft, int $textMarginTop, int $textTransparency, int $fontSize, string $pathToTTFFont = null): string;
 }
