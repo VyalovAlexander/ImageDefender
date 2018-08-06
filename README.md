@@ -15,6 +15,10 @@ Execute the following command to get the latest version of the package:
 ```terminal
 composer require vyalov.alexander/imagedefender
 ```
+Check you php.ini you must see, something like this:
+
+GD Support            enabled  
+GD Version            bundled (2.0.28 compatible)  
 
 ## Usage
 

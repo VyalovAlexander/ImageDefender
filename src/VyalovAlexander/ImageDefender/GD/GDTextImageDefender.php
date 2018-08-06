@@ -1,6 +1,6 @@
 <?php
 
-namespace VyalovAlexander\ImageDefender\Gd;
+namespace VyalovAlexander\ImageDefender\GD;
 
 use VyalovAlexander\ImageDefender\ImageStorageInterface;
 use VyalovAlexander\ImageDefender\TextImageDefenderInterface;
@@ -18,7 +18,7 @@ class GDTextImageDefender implements TextImageDefenderInterface
     public function __construct(ImageStorageInterface $storage)
     {
         $this->storage = $storage;
-        $this->font = dirname(__FILE__) . '/resources/font.ttf';
+        $this->font = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR .'font.ttf';
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace VyalovAlexander\ImageDefender\Gd;
+namespace VyalovAlexander\ImageDefender\GD;
 
 use VyalovAlexander\ImageDefender\ImageStorageInterface;
 use VyalovAlexander\ImageDefender\StampImageDefenderInterface;
