@@ -10,11 +10,12 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "hassankhan/config": "^1.0"
     },
     "autoload": {
         "psr-4" : {
-            "VyalovAlexander\\ImageDefender\\" : "src/VyalovAlexander/ImageDefender/"
+            "VyalovAlexander\\ImageDefender\\" : "src/"
         }
     }
 }

@@ -20,8 +20,6 @@ class GDImageStorage implements ImageStorageInterface
                 $image = imagecreatefrompng($filename);
                 break;
             case "jpeg":
-                $image = imagecreatefromjpeg($filename);
-                break;
             case "jpg":
                 $image = imagecreatefromjpeg($filename);
                 break;
@@ -72,7 +70,7 @@ class GDImageStorage implements ImageStorageInterface
      */
     private function extension(string $filename) : string{
         $ex = explode(".", $filename);
-        return array_pop($ex);
+        return mb_strtolower(array_pop($ex));
     }
 
 }
