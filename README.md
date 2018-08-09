@@ -4,7 +4,7 @@
 ---
 
 ImageDefender is a PHP library for protecting images against copying.
-It allows to overaly an image (stamp) or text to your picture, to prevent unlicensed copying of your content.
+It allows to overaly an image (stamp) or text (sign) to your picture, to prevent unlicensed copying of your content.
 
 ## Installation
 
@@ -24,33 +24,48 @@ GD Version            bundled (2.0.28 compatible)
 
 ## GD realisation of ImageDefenderInterface
 
+```php
+
+$factory = new \VyalovAlexander\ImageDefender\GD\GDImageDefenderFactory();
+
+//Objects are ready to work
+$signDefender = $factory->getSignImageDefender();
+$stampDefender = $factory->getStampImageDefender();
+
+```
+
 ### Stamp
 ```php
-    $storage = new GDImageStorage();
-    
-    $stampDefender = new GDStampImageDefender($storage);
-    $stampDefender->imposeStamp(
-        "path/to/picture/you/want/to/protect",
-        "/save/path/of/resulting/picture",
-        "/path/to/stamp/image",
-        10, 10, 20);
+
+//you can configure your "stamp defender"
+$stampDefender->setStamp('path/to/stmap/image.png')
+    ->setStampHeight($height)
+    ->setStampWidth($width)
+    ->setStampMarginRight($marginRight)
+    ->setStampMarginBottom($marginBottom)
+    ->setStampTransparency($transparency);
+
+$stampDefender->impose('path/to/picture/you/want/to/protect.png', "/save/path/of/resulting/picture.png");
 ```  
 ![Stamp](https://preview.ibb.co/gfYMLe/stamp.png)
     
-### Text
+### Sign
 ```php
-    $storage = new GDImageStorage();
-    
-    $textDefender = new GDTextImageDefender($storage);
-    $textDefender->imposeText(
-        "path/to/picture/you/want/to/protect",
-        "/save/path/of/resulting/picture",
-        "Copyright © VyalovAlexander/ImageDefender", 
-        280, 820,  10, 20);
+
+//you can configure your "sign defender"
+$signDefender->setFont('path/to/your/TTF/font.ttf')
+        ->setSign($textYouWantToImpose)
+        ->setSignAngle($textAngle)
+        ->setSignColor($red, $green, $blue)
+        ->setSignFontSize($fontSize)
+        ->setSignMarginBottom($marginRight)
+        ->setSignMarginRight($marginRight)
+        ->setSignTransparency($textTransparency);
+
+$signDefender->impose('path/to/picture/you/want/to/protect.png', "/save/path/of/resulting/picture.png");
 ```      
 ![Text](https://preview.ibb.co/d5ENRK/text.png)
     
-
 
 ## License
 

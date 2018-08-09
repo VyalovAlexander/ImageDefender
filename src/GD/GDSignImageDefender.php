@@ -182,7 +182,7 @@ class GDSignImageDefender implements SignImageDefenderInterface
 
         $textBox = imagettfbbox($this->fontSize, $this->angle, $this->font, $this->text);
         $textWidth = $textBox[2] - $textBox[0];
-        $textHeight = $textBox[7] - $textBox[1];
+        $textHeight = $textBox[1] - $textBox[7];
 
         imagettftext($image, $this->fontSize, $this->angle, $imageWidth - $this->marginRight - $textWidth, $imageHeight - $this->marginBottom - $textHeight, $color, $this->font, $this->text);
 
