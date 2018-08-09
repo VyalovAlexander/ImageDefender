@@ -28,8 +28,8 @@ class GDImageDefenderFactory implements ImageDefenderFactory
     public function __construct()
     {
         $this->storage = new GDImageStorage();
-        $this->singConfig = require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'sign.php';
-        $this->stampConfig = require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'stamp.php';
+        $this->singConfig = GDConfig::sign();
+        $this->stampConfig = GDConfig::stamp();
     }
 
     /**
