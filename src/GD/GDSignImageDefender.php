@@ -8,8 +8,51 @@ use VyalovAlexander\ImageDefender\SignImageDefenderInterface;
 class GDSignImageDefender implements SignImageDefenderInterface
 {
 
+    /**
+     * @var ImageStorageInterface
+     */
     private $storage;
+    /**
+     * @var
+     */
     private $font;
+    /**
+     * @var
+     */
+    private $text;
+    /**
+     * @var
+     */
+    private $marginRight;
+    /**
+     * @var
+     */
+    private $marginBottom;
+    /**
+     * @var
+     */
+    private $green;
+    /**
+     * @var
+     */
+    private $red;
+    /**
+     * @var
+     */
+    private $blue;
+    /**
+     * @var
+     */
+    private $transparency;
+    /**
+     * @var
+     */
+    private $fontSize;
+    /**
+     * @var
+     */
+    private $angle;
+
 
     /**
      * GDTextImageDefender constructor.
@@ -20,64 +63,128 @@ class GDSignImageDefender implements SignImageDefenderInterface
         $this->storage = $storage;
     }
 
-    public function setSign(string $text): self
+    /**
+     * @param string $text
+     * @return SignImageDefenderInterface
+     */
+    public function setSign(string $text): SignImageDefenderInterface
     {
-        // TODO: Implement setSign() method.
+        $this->text = $text;
+
+        return $this;
     }
 
-    public function setSignMarginRight(int $margin): self
+    /**
+     * @param int $margin
+     * @return SignImageDefenderInterface
+     */
+    public function setSignMarginRight(int $margin): SignImageDefenderInterface
     {
-        // TODO: Implement setSignMarginRight() method.
+        $this->marginRight = $margin;
+
+        return $this;
     }
 
-    public function setSignMarginBottom(int $margin): self
+    /**
+     * @param int $margin
+     * @return SignImageDefenderInterface
+     */
+    public function setSignMarginBottom(int $margin): SignImageDefenderInterface
     {
-        // TODO: Implement setSignMarginBottom() method.
+        $this->marginBottom = $margin;
+
+        return $this;
+
     }
 
-    public function setSignColor(int $red, int $green, int $blue): self
+    /**
+     * @param int $red
+     * @param int $green
+     * @param int $blue
+     * @return SignImageDefenderInterface
+     */
+    public function setSignColor(int $red, int $green, int $blue): SignImageDefenderInterface
     {
-        // TODO: Implement setSignColor() method.
+        $this->green = $green;
+        $this->blue = $blue;
+        $this->red = $red;
+
+        return $this;
     }
 
-    public function setSignTransparency(int $transparency): self
+    /**
+     * @param int $transparency
+     * @return SignImageDefenderInterface
+     * @throws \Exception
+     */
+    public function setSignTransparency(int $transparency): SignImageDefenderInterface
     {
-        // TODO: Implement setSignTransparency() method.
+        if ($transparency < 0 || $transparency > 100)
+        {
+            throw new \Exception("Transparency must be between 0 and 100.");
+        }
+        $this->transparency = $transparency;
+
+        return $this;
     }
 
-    public function setSignFontSize(int $fontSize): self
+    /**
+     * @param int $fontSize
+     * @return SignImageDefenderInterface
+     * @throws \Exception
+     */
+    public function setSignFontSize(int $fontSize): SignImageDefenderInterface
     {
-        // TODO: Implement setSignFontSize() method.
+        if ($fontSize < 0)
+        {
+            throw new \Exception("Font size must be more then 0.");
+        }
+        $this->fontSize = $fontSize;
+
+        return $this;
     }
 
-    public function setFont(string $pathToFontFile): self
+    /**
+     * @param string $pathToFontFile
+     * @return SignImageDefenderInterface
+     */
+    public function setFont(string $pathToFontFile): SignImageDefenderInterface
     {
-        // TODO: Implement setFont() method.
+       $this->font = $pathToFontFile;
+
+       return $this;
     }
 
-    public function setSignAngle(int $angle): self
+    /**
+     * @param int $angle
+     * @return SignImageDefenderInterface
+     */
+    public function setSignAngle(int $angle): SignImageDefenderInterface
     {
-        // TODO: Implement setSignAngle() method.
+        $this->angle = $angle;
+
+        return $this;
     }
 
 
     /**
      * @param string $pathToImage
      * @param string $savePath
-     * @param string $text
-     * @param int $textXPosition
-     * @param int $textYPosition
-     * @param int $textTransparency
-     * @param int $fontSize
      * @return string
      */
-    public function imposeText(string $pathToImage, string $savePath, string $text, int $textXPosition, int $textYPosition, int $textTransparency, int $fontSize) : string
+    public function impose(string $pathToImage, string $savePath) : string
     {
         $image = $this->storage->load($pathToImage);
+        $imageWidth = imagesx($image);
+        $imageHeight = imagesy($image);
 
-        $black = imagecolorallocatealpha($image, 0, 0, 0, $textTransparency);
+        $color = imagecolorallocatealpha($image, $this->red, $this->green, $this->blue, $this->transparency);
 
-        imagettftext($image, $fontSize, 0, $textXPosition, $textYPosition, $black, $this->font, $text);
+        $textBox = imagettfbbox($this->fontSize, $this->angle, $this->font, $this->text);
+        $textWidth = $textBox[2] - $textBox[0];
+        $textHeight = $textBox[7] - $textBox[1];
+
+        imagettftext($image, $this->fontSize, $this->angle, $imageWidth - $this->marginRight - $textWidth, $imageHeight - $this->marginBottom - $textHeight, $color, $this->font, $this->text);
 
         return $this->storage->save($savePath, $image);
     }

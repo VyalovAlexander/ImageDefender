@@ -8,12 +8,33 @@ use VyalovAlexander\ImageDefender\StampImageDefenderInterface;
 class GDStampImageDefender implements StampImageDefenderInterface
 {
 
+    /**
+     * @var ImageStorageInterface
+     */
     private $storage;
+    /**
+     * @var
+     */
     private $stamp;
+    /**
+     * @var
+     */
     private $marginRight;
+    /**
+     * @var
+     */
     private $marginBottom;
+    /**
+     * @var
+     */
     private $transparency;
+    /**
+     * @var
+     */
     private $height;
+    /**
+     * @var
+     */
     private $width;
 
     /**
@@ -25,6 +46,11 @@ class GDStampImageDefender implements StampImageDefenderInterface
         $this->storage = $storage;
     }
 
+    /**
+     * @param string $pathToImage
+     * @param string $savePath
+     * @return string
+     */
     public function impose(string $pathToImage, string $savePath): string
     {
         $image = $this->storage->load($pathToImage);
@@ -40,6 +66,10 @@ class GDStampImageDefender implements StampImageDefenderInterface
         return $this->storage->save($savePath, $image);
     }
 
+    /**
+     * @param string $pathToStamp
+     * @return StampImageDefenderInterface
+     */
     public function setStamp(string $pathToStamp): StampImageDefenderInterface
     {
         $this->stamp = $this->storage->load($pathToStamp);
@@ -47,6 +77,10 @@ class GDStampImageDefender implements StampImageDefenderInterface
         return $this;
     }
 
+    /**
+     * @param int $margin
+     * @return StampImageDefenderInterface
+     */
     public function setStampMarginRight(int $margin): StampImageDefenderInterface
     {
         $this->marginRight = $margin;
@@ -54,6 +88,10 @@ class GDStampImageDefender implements StampImageDefenderInterface
         return $this;
     }
 
+    /**
+     * @param int $margin
+     * @return StampImageDefenderInterface
+     */
     public function setStampMarginBottom(int $margin): StampImageDefenderInterface
     {
         $this->marginBottom = $margin;
@@ -61,6 +99,11 @@ class GDStampImageDefender implements StampImageDefenderInterface
         return $this;
     }
 
+    /**
+     * @param int $transparency
+     * @return StampImageDefenderInterface
+     * @throws \Exception
+     */
     public function setStampTransparency(int $transparency): StampImageDefenderInterface
     {
         if ($transparency < 0 || $transparency > 100)
@@ -72,6 +115,10 @@ class GDStampImageDefender implements StampImageDefenderInterface
         return $this;
     }
 
+    /**
+     * @param int $height
+     * @return StampImageDefenderInterface
+     */
     public function setStampHeight(int $height): StampImageDefenderInterface
     {
         $this->height = $height;
@@ -79,6 +126,10 @@ class GDStampImageDefender implements StampImageDefenderInterface
         return $this;
     }
 
+    /**
+     * @param int $width
+     * @return StampImageDefenderInterface
+     */
     public function setStampWidth(int $width): StampImageDefenderInterface
     {
         $this->width = $width;
